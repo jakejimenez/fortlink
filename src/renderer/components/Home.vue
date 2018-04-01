@@ -1,24 +1,39 @@
 <template>
 <div>
   <h2 style="text-align: center">{{ title }}</h2>
-  <h4 style="text-align: center" class="ftfont">{{ isSigned ? "Welcome!" : "Not signed in"}}</h4>
-  <p style="text-align: center; color: white;" class="ftfont"><a href="#">Home</a> ------ <a href="#" v-on:click="goToStats">Stats</a> ------ <a href="#">Match Finder</a></p>
+  <div style="width: 45%; margin: 0 auto;" class="btn-toolbar">
+    <div class="btn-group">
+      <a class="btn btn-primary" href="#"><span class="fui-home"></span></a>
+      <a v-on:click="goToStats" class="btn btn-primary" href="#"><span class="fui-list-columned"></span></a>
+      <a class="btn btn-primary" href="#"><span class="fui-search"></span></a>
+      <a class="btn btn-primary" href="#"><span class="fui-user"></span></a>
+    </div>
+  </div>
+  <br/>
+
 </div>
 </template>
 
 <script>
+var request = require('request');
+var fortniteBrNews = "https://fortnitecontent-website-prod07.ol.epicgames.com/content/api/pages/fortnite-game";
 
 export default {
   name: 'home',
-  data () {
+  data() {
     return {
-      title: "Fortlink",
-      isSigned: false
+      title: "Fortlink"
     }
   },
   methods: {
     goToStats() {
       this.$router.push('/stats')
+    },
+
+    getNews() {
+      request(fortniteBrNews, function(error, response, body) {
+        console.log(response)
+      });
     }
   }
 }

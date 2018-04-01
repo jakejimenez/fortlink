@@ -11,9 +11,9 @@ export default new Router({
       component: require('@/components/Home').default
     },
     {
-      path: '/leader',
-      name: 'leader',
-      component: require('@/components/Leaderboards').default
+      path: '/match',
+      name: 'match',
+      component: require('@/components/MatchFinder').default
     },
     {
       path: '/stats',
