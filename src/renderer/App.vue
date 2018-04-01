@@ -5,6 +5,16 @@
 </template>
 
 <script>
+var firebase = require('firebase');
+var app = firebase.initializeApp({
+  apiKey: "AIzaSyBmiUcwc3WQs-IEse7Zoov9wdhwsbzczJY",
+  authDomain: "harryftbot.firebaseapp.com",
+  databaseURL: "https://harryftbot.firebaseio.com",
+  projectId: "harryftbot",
+  storageBucket: "harryftbot.appspot.com",
+  messagingSenderId: "457014829417"
+});
+
   export default {
     name: 'fortlink'
   }
