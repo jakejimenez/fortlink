@@ -21,6 +21,11 @@ export default new Router({
       component: require('@/components/Stats').default
     },
     {
+      path: '/profile',
+      name: 'profile',
+      component: require('@/components/Profile').default
+    },
+    {
       path: '*',
       redirect: '/'
     }

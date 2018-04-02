@@ -7,7 +7,7 @@
       <a class="btn btn-primary" href="#"><span class="fui-home"></span></a>
       <a v-on:click="goToStats" class="btn btn-primary" href="#"><span class="fui-list-columned"></span></a>
       <a class="btn btn-primary" href="#"><span class="fui-search"></span></a>
-      <a class="btn btn-primary" href="#"><span class="fui-user"></span></a>
+      <a v-on:click="goToProfile" class="btn btn-primary" href="#"><span class="fui-user"></span></a>
     </div>
   </div>
   <br/>
@@ -29,10 +29,15 @@
 </template>
 
 <script>
+
+// Requires
 var request = require('request');
 const Store = require('electron-store');
-const localDb = new Store();
 var firebase = require('firebase');
+const isOnline = require('is-online');
+
+// Important Variables
+const localDb = new Store();
 var fortniteBrNews = "https://fortnitecontent-website-prod07.ol.epicgames.com/content/api/pages/fortnite-game/battleroyalenews";
 
 export default {
@@ -47,6 +52,10 @@ export default {
   methods: {
     goToStats() {
       this.$router.push('/stats')
+    },
+
+    goToProfile() {
+      this.$router.push('/profile')
     },
 
     getNews() {
@@ -94,8 +103,12 @@ export default {
     this.getNews();
 
     setInterval(function() {
-      self.checkForStatus();
-      self.checkForPushNotif();
+      isOnline().then(online => {
+        if (online) {
+          self.checkForStatus();
+          self.checkForPushNotif();
+        }
+      })
     }, 10000)
   }
 }

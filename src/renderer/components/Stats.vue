@@ -6,7 +6,7 @@
       <a v-on:click="goHome" class="btn btn-primary" href="#fakelink"><span class="fui-home"></span></a>
       <a class="btn btn-primary" href="#fakelink"><span class="fui-list-columned"></span></a>
       <a class="btn btn-primary" href="#fakelink"><span class="fui-search"></span></a>
-      <a class="btn btn-primary" href="#fakelink"><span class="fui-user"></span></a>
+      <a v-on:click="goToProfile"  class="btn btn-primary" href="#fakelink"><span class="fui-user"></span></a>
     </div>
   </div>
   <br />
@@ -117,6 +117,10 @@ export default {
 
     goHome() {
       this.$router.push('/')
+    },
+
+    goToProfile() {
+      this.$router.push('/profile')
     }
   }
 }
