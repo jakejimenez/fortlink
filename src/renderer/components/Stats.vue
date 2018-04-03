@@ -13,7 +13,7 @@
   <div class="container">
     <div class="todo">
       <div class="todo-search">
-        <input id="inputfield" class="todo-search-field" v-on:keyup="handleEnter" type="search" value="" placeholder="ninja">
+        <input id="inputfield" class="todo-search-field ftfont" v-on:keyup="handleEnter" type="search" value="" placeholder="ninja">
       </div>
       <ul>
         <li>

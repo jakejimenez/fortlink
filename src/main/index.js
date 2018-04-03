@@ -12,12 +12,11 @@ const winURL = process.env.NODE_ENV === 'development'
 
 var mb = menubar({
   index: winURL,
-  icon: './Favicon_small.png',
   width: 400,
   height: 800,
   preloadWindow: true
 })
 
 mb.on('ready', function ready () {
-  console.log('Fortlink running v0.1.9')
+  console.log('Fortlink running v0.4.4')
 })

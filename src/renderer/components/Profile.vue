@@ -11,26 +11,39 @@
     </div>
   </div>
   <br/>
-  <div class="container">
+  <div v-if="!authenticated" class="container">
     <div class="login-form">
       <div class="form-group">
-        <input v-model="login.email" type="email" class="form-control login-field" value="" placeholder="Email" id="login-email">
+        <input v-model="login.email" type="email" class="form-control login-field ftfont" value="" placeholder="Email" id="login-email">
         <label class="login-field-icon fui-user" for="login-name"></label>
       </div>
 
       <div class="form-group">
-        <input v-model="login.username" type="text" class="form-control login-field" value="" placeholder="Username" id="login-username">
-        <label class="login-field-icon fui-play" for="login-username"></label>
-      </div>
-
-      <div class="form-group">
-        <input v-model="login.password" type="password" class="form-control login-field" value="" placeholder="Password" id="login-pass">
+        <input v-model="login.password" type="password" class="form-control login-field ftfont" value="" placeholder="Password" id="login-pass">
         <label class="login-field-icon fui-lock" for="login-pass"></label>
       </div>
 
-      <a v-on:click="loginUser" class="btn btn-primary btn-lg btn-block" href="#">Log in</a>
-      <a v-on:click="signup" class="btn btn-success btn-lg btn-block" href="#">Signup</a>
-      <a class="login-link" href="#">Lost your password?</a>
+      <a v-on:click="loginUser" class="btn btn-primary btn-lg btn-block ftfont" href="#">Log in</a>
+      <a v-on:click="signup" class="btn btn-success btn-lg btn-block ftfont" href="#">Signup</a>
+      <a class="login-link ftfont" href="#">Lost your password?</a>
+    </div>
+  </div>
+  <div v-else class="container">
+    <div class="todo">
+      <ul>
+        <li >
+          <div class="todo-icon"></div>
+          <div class="todo-content">
+            <img style="display: block; margin: 0 auto; border-radius: 25px;" :src=userAuth.imageURL width="100" />
+            <h4 style="text-align: center;" class="ftfont">{{ userAuth.email }}</h4>
+            <p class="ftfont" style="color: white;">
+
+            </p>
+            <br />
+            <a v-on:click="signOut" class="btn btn-warning btn-lg btn-block ftfont" href="#">Sign out</a>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
@@ -39,9 +52,9 @@
 <script>
 // Requires
 var request = require('request');
-const Store = require('electron-store');
+var Store = require('electron-store');
 var firebase = require('firebase');
-const isOnline = require('is-online');
+var isOnline = require('is-online');
 
 // Important Variables
 const localDb = new Store();
@@ -56,7 +69,18 @@ export default {
         password: "",
         email: ""
       },
-      taskStatus: ""
+      userAuth: {
+        email: "",
+        username: "",
+        imageURL: "",
+        uid: "",
+        friends: [],
+        stats: [],
+        refreshToken: ""
+
+      },
+      taskStatus: "",
+      authenticated: false
     }
   },
   methods: {
@@ -73,14 +97,46 @@ export default {
     },
 
     loginUser() {
+      console.log("Working...")
       var self = this;
-      firebase.auth().signInWithEmailAndPassword(self.login.email, self.login.password).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+      var userLogin = {
+        email: self.login.email,
+        password: self.login.password
+      }
+      // Sign in existing user
+      firebase.auth().signInWithEmailAndPassword(userLogin.email, userLogin.password)
+        .catch(function(err) {
+          if (err) {
+            console.log(err)
+            self.taskStatus = "An error occured."
+          }
+        });
 
-        if (errorCode) {
-          taskStatus = "An error occurred...";
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user == undefined) {
+          self.authenticated = false;
+        } else {
+          console.log(user);
+          self.authenticated = true;
+
+          // Save user information
+          if (user.photoURL == "" || user.photoURL == null || user.photoURL == undefined) {
+            var userPhoto = "http://via.placeholder.com/100x100";
+          }
+
+          localDb.set('user', {
+            "displayName": user.displayName,
+            "email": user.email,
+            "uid": user.uid,
+            "refreshToken": user.refreshToken,
+            "password": userLogin.password,
+            "imageURL": userPhoto
+          });
+
+          self.userAuth.email = localDb.get('user.email');
+          self.userAuth.uid = localDb.get('user.uid')
+          self.userAuth.refreshToken = localDb.get('user.refreshToken');
+          self.userAuth.imageURL = localDb.get('user.imageURL');
         }
       });
     },
@@ -89,13 +145,30 @@ export default {
       var self = this;
       firebase.auth().createUserWithEmailAndPassword(self.login.email, self.login.password).catch(function(error) {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-
-        if (errorCode) {
-          taskStatus = "An error occurred...";
+        if (error) {
+          console.log(error)
+          self.taskStatus = "An error occured."
         }
-      });
+
+        self.taskStatus = "User created..."
+      })
+    },
+
+    signOut() {
+      var self = this;
+
+      firebase.auth().signOut()
+        .catch(function(err) {
+          if (err) {
+            console.log(err)
+          }
+        });
+
+        // Delete local user
+        localDb.delete('user');
+
+        // Remove authenticated
+        self.authenticated = false;
     },
 
     forgotPass() {
@@ -103,7 +176,30 @@ export default {
     }
   },
   mounted: function() {
+    var self = this;
 
+    if (localDb.get('user')) {
+      console.log(localDb.get('user'))
+
+      firebase.auth().signInWithEmailAndPassword(localDb.get('user.email'), localDb.get('user.password'))
+        .catch(function(err) {
+          if (err) {
+            console.log(err)
+            self.taskStatus = "An error occured."
+          }
+        });
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user == undefined) {
+          self.authenticated = false;
+        } else {
+          console.log(user);
+          self.authenticated = true;
+        }
+      });
+    } else {
+      self.authenticated = false;
+    }
   }
 }
 </script>
