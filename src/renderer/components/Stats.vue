@@ -19,9 +19,13 @@
         <li>
           <div class="todo-icon"></div>
           <div class="todo-content">
-            <h3>
-              <strong>Stats: <i id="username"></i></strong>
-            </h3>
+            <hr />
+            <h4>General</h4>
+            <span id="kpd-general"></span>
+            <br/>
+            <span id="totalwins-general"></span>
+            <br/>
+            <span id="winrate-general"></span>
             <hr/>
             <h4>Solo</h4>
             <span id="kpd-solo"></span>
@@ -44,7 +48,6 @@
             <br/>
             <span id="winrate-squad"></span>
             <hr/>
-            <a href="#" class="ftfont btn btn-block btn-embossed btn-lg btn-success">Save User</a>
           </div>
         </li>
       </ul>
@@ -80,6 +83,15 @@ export default {
       request(options, (error, response, body) => {
         if (!error && response.statusCode == 200) {
           var stats = JSON.parse(body);
+
+          // General
+          var killDeath = document.getElementById('kpd-general');
+          killDeath.innerHTML = `K/D: ${stats.br.stats.pc.all.kpd}`;
+          var totalwins = document.getElementById('totalwins-general');
+          totalwins.innerHTML = `Wins: ${stats.br.stats.pc.all.wins}`;
+          var winrate = document.getElementById('winrate-general');
+          winrate.innerHTML = `Win Rate: ${stats.br.stats.pc.all.winRate}%`;
+
 
           // Solos
           var killDeath = document.getElementById('kpd-solo');

@@ -24,6 +24,9 @@
         </li>
       </ul>
     </div>
+    <div style="width: 35%; margin: 0 auto;">
+      <a v-on:click="closeWindow" class="btn btn-danger ftfont" href="#">Exit Fortlink</a>
+    </div>
   </div>
 </div>
 </template>
@@ -35,6 +38,7 @@ var request = require('request');
 const Store = require('electron-store');
 var firebase = require('firebase');
 const isOnline = require('is-online');
+const remote = require('electron').remote
 
 // Important Variables
 const localDb = new Store();
@@ -46,10 +50,15 @@ export default {
     return {
       title: "Fortlink",
       newsParsed: [],
-      taskStatus: ""
+      taskStatus: "",
+      w: remote.getCurrentWindow()
     }
   },
   methods: {
+    closeWindow() {
+      this.w.close();
+    },
+
     goToStats() {
       this.$router.push('/stats')
     },

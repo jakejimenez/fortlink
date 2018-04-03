@@ -197,6 +197,11 @@ export default {
         } else {
           console.log(user);
           self.authenticated = true;
+
+          self.userAuth.email = user.email;
+          self.userAuth.uid = user.uid;
+          self.userAuth.refreshToken = user.refreshToken;
+          self.userAuth.imageURL = localDb.get('user.imageURL');
         }
       });
     } else {
