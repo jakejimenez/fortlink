@@ -1,3 +1,4 @@
+
 <template>
 <div>
   <h2 style="text-align: center">{{ title }}</h2>
@@ -50,6 +51,7 @@
 </template>
 
 <script>
+// Some sort of error is occuring where the program continues showing a white screen when compiled. 4/2/18 10:34 PM
 // Requires
 var request = require('request');
 var Store = require('electron-store');
