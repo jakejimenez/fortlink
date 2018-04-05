@@ -26,6 +26,11 @@ export default new Router({
       component: require('@/components/Profile').default
     },
     {
+      path: '/status',
+      name: 'status',
+      component: require('@/components/Status').default
+    },
+    {
       path: '*',
       redirect: '/'
     }

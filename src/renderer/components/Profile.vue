@@ -3,12 +3,13 @@
 <div>
   <h2 style="text-align: center">{{ title }}</h2>
   <p class="ftfont" style="color:white; text-align: center;">{{ taskStatus }}</p>
-  <div style="width: 45%; margin: 0 auto;" class="btn-toolbar">
+  <div style="width: 60%; margin: 0 auto;" class="btn-toolbar">
     <div class="btn-group">
       <a v-on:click="goToHome" class="btn btn-primary" href="#"><span class="fui-home"></span></a>
       <a v-on:click="goToStats" class="btn btn-primary" href="#"><span class="fui-list-columned"></span></a>
       <a class="btn btn-primary" href="#"><span class="fui-search"></span></a>
       <a class="btn btn-primary" href="#"><span class="fui-user"></span></a>
+      <a v-on:click="goToStatus" class="btn btn-primary" href="#"><span class="fui-windows"></span></a>
     </div>
   </div>
   <br/>
@@ -94,8 +95,16 @@ export default {
       this.$router.push('/')
     },
 
+    goToStatus() {
+      this.$router.push('/status')
+    },
+
     goToMatch() {
       this.$router.push('/match')
+    },
+
+    goToStatus() {
+      this.$router.push('/status')
     },
 
     loginUser() {
@@ -181,7 +190,6 @@ export default {
     var self = this;
 
     if (localDb.get('user')) {
-      console.log(localDb.get('user'))
 
       firebase.auth().signInWithEmailAndPassword(localDb.get('user.email'), localDb.get('user.password'))
         .catch(function(err) {
@@ -195,7 +203,6 @@ export default {
         if (user == undefined) {
           self.authenticated = false;
         } else {
-          console.log(user);
           self.authenticated = true;
 
           self.userAuth.email = user.email;
