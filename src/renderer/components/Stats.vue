@@ -14,7 +14,7 @@
   <div class="container">
     <div class="todo">
       <div class="todo-search">
-        <input id="inputfield" class="todo-search-field ftfont" v-on:keyup="handleEnter" type="search" value="" placeholder="ninja">
+        <input id="inputfield" class="todo-search-field ftfont" v-on:keyup="handleEnter" type="search" value="" placeholder="skrypt-cs">
       </div>
       <ul>
         <li>
@@ -70,7 +70,6 @@ export default {
   methods: {
     getStats() {
       var playerName = document.getElementById('inputfield').value;
-      document.getElementById('username').innerHTML = playerName;
 
       var options = {
         method: "GET",

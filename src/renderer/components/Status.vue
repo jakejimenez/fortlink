@@ -15,12 +15,22 @@
   <div class="container">
     <div class="todo">
       <ul>
-        <li v-for="item in statusList">
-          <div class="todo-icon"></div>
+        <li v-for="(item, index) in parsedList">
+          <div class="todo-icon">
+            <img v-if="statusList[index] == 'Green'" src="https://cdn-images-1.medium.com/max/512/1*nZ9VwHTLxAfNCuCjYAkajg.png" width="50" />
+            <img v-if="statusList[index] == 'Blue'" src="http://www.knowledgeall.net/wp-content/uploads/2013/03/blue-dot.png" width="50" />
+            <img v-if="statusList[index] == 'Yellow'" src="http://www.clker.com/cliparts/m/a/r/p/w/I/yellow-dot-md.png" width="50" />
+            <img v-if="statusList[index] == 'Red'" src="http://www.ddivani.com/images/dot.png" width="50" />
+          </div>
           <div class="todo-content">
             <h4 class="ftfont" style="color: white;">
               {{item.name}}
-            </h4>{{item.status}}
+            </h4>
+            <p v-if="statusList[index] == 'Green'" class="ftfont" style="font-size: 15px; color: green;">Operational</p>
+            <p v-else-if="statusList[index] == 'Blue'" class="ftfont" style="font-size: 15px; color: #00FFFF;">Under Maintenance</p>
+            <p v-else-if="statusList[index] == 'Yellow'" class="ftfont" style="font-size: 15px; color: yellow;">Degraded Performance</p>
+            <p v-else-if="statusList[index] == 'Red'" class="ftfont" style="font-size: 15px; color: red;">Disabled</p>
+            <p v-else class="ftfont" style="font-size: 15px; color: red;">Status Unavailable</p>
           </div>
         </li>
       </ul>
@@ -45,27 +55,21 @@ export default {
     return {
       title: "Fortlink",
       taskStatus: "",
-      statusList: [{
-        name: "Website and Forums",
-        "status": ""
+      statusList: [],
+      parsedList: [{
+        name: "Website and Forums"
       }, {
-        name: "Game Services",
-        "status": ""
+        name: "Game Services"
       }, {
-        "name": "Login",
-        "status": ""
+        "name": "Login"
       }, {
-        "name": "Parties, Friends, and Messaging",
-        "status": ""
+        "name": "Parties, Friends, and Messaging"
       }, {
-        "name": "Voice Chat",
-        "status": ""
+        "name": "Voice Chat"
       }, {
-        "name": "Matchmaking",
-        "status": ""
+        "name": "Matchmaking"
       }, {
-        "name": "Stats and Leaderboards",
-        "status": ""
+        "name": "Stats and Leaderboards"
       }]
     }
   },
@@ -104,26 +108,15 @@ export default {
         }
       });
 
-      for (var i = 0; i < statusArray.length; i++) {
-        if (statusArray[i] == "Green") {
-          self.statusList[i].status = "Operational";
-        } else if (statusArray[i] == "Blue") {
-          self.statusList[i].status = "Under Maintenance";
-        } else if (statusArray[i] == "Red") {
-          self.statusList[i].status = "Disabled";
-        } else if (statusArray[i] == "Degraded Performance") {
-          self.statusList[i].status = "Disabled";
-        } else {
-          self.statusList[i].status = "Status unavailable";
-        }
-      }
-
       self.statusList = statusArray;
     }
   },
   mounted: function() {
     this.getStatus();
-    console.log(this.statusList);
+    console.log(this.statusList)
+
+    console.log(this.statusList.length)
+
   }
 }
 </script>
