@@ -19,36 +19,39 @@
       <ul>
         <li>
           <div class="todo-icon"></div>
-          <div class="todo-content">
+          <div v-if="isObtained" class="todo-content">
             <hr />
             <h4>General</h4>
-            <span id="kpd-general"></span>
+            <span id="kpd-general">K/D: {{stats.general.kpd}}</span>
             <br/>
-            <span id="totalwins-general"></span>
+            <span id="totalwins-general">Wins: {{stats.general.totalWins}}</span>
             <br/>
-            <span id="winrate-general"></span>
+            <span id="winrate-general">Win Rate: {{stats.general.winRate}}%</span>
             <hr/>
             <h4>Solo</h4>
-            <span id="kpd-solo"></span>
+            <span id="kpd-solo">K/D: {{stats.solo.kpd}}</span>
             <br/>
-            <span id="totalwins-solo"></span>
+            <span id="totalwins-solo">Wins: {{stats.solo.totalWins}}</span>
             <br/>
-            <span id="winrate-solo"></span>
+            <span id="winrate-solo">Win Rate: {{stats.solo.winRate}}%</span>
             <hr/>
             <h4>Duo</h4>
-            <span id="kpd-duo"></span>
+            <span id="kpd-duo">K/D: {{stats.duo.kpd}}</span>
             <br/>
-            <span id="totalwins-duo"></span>
+            <span id="totalwins-duo">Wins: {{stats.duo.totalWins}}</span>
             <br/>
-            <span id="winrate-duo"></span>
+            <span id="winrate-duo">Win Rate: {{stats.duo.winRate}}%</span>
             <hr/>
             <h4>Squad</h4>
-            <span id="kpd-squad"></span>
+            <span id="kpd-squad">K/D: {{stats.squad.kpd}}</span>
             <br/>
-            <span id="totalwins-squad"></span>
+            <span id="totalwins-squad">Wins: {{stats.squad.totalWins}}</span>
             <br/>
-            <span id="winrate-squad"></span>
+            <span id="winrate-squad">Win Rate: {{stats.squad.winRate}}%</span>
             <hr/>
+          </div>
+          <div v-else class="todo-content">
+            <p class="ftfont">No stats to display</p>
           </div>
         </li>
       </ul>
@@ -59,18 +62,40 @@
 
 <script>
 var request = require('request')
-
 export default {
   name: 'home',
   data () {
     return {
-      title: "Fortlink"
+      title: "Fortlink",
+      isObtained: false,
+      stats: {
+        general: {
+          kpd: "",
+          totalWins: "",
+          winRate: ""
+        },
+        solo: {
+          kpd: "",
+          totalWins: "",
+          winRate: ""
+        },
+        duo: {
+          kpd: "",
+          totalWins: "",
+          winRate: ""
+        },
+        squad: {
+          kpd: "",
+          totalWins: "",
+          winRate: ""
+        }
+      }
     }
   },
   methods: {
     getStats() {
+      var self = this;
       var playerName = document.getElementById('inputfield').value;
-
       var options = {
         method: "GET",
         url: `https://fortnite.y3n.co/v2/player/${playerName}`,
@@ -79,62 +104,48 @@ export default {
           'X-Key': "pTVPOvUPxbecRVHfKpMT"
         }
       }
-
       request(options, (error, response, body) => {
         if (!error && response.statusCode == 200) {
           var stats = JSON.parse(body);
+          self.isObtained = true;
 
           // General
-          var killDeath = document.getElementById('kpd-general');
-          killDeath.innerHTML = `K/D: ${stats.br.stats.pc.all.kpd}`;
-          var totalwins = document.getElementById('totalwins-general');
-          totalwins.innerHTML = `Wins: ${stats.br.stats.pc.all.wins}`;
-          var winrate = document.getElementById('winrate-general');
-          winrate.innerHTML = `Win Rate: ${stats.br.stats.pc.all.winRate}%`;
-
+          self.stats.general.kpd = stats.br.stats.pc.all.kpd;
+          self.stats.general.totalWins = stats.br.stats.pc.all.wins;
+          self.stats.general.winRate = stats.br.stats.pc.all.winRate;
 
           // Solos
-          var killDeath = document.getElementById('kpd-solo');
-          killDeath.innerHTML = `K/D: ${stats.br.stats.pc.solo.kpd}`;
-          var totalwins = document.getElementById('totalwins-solo');
-          totalwins.innerHTML = `Wins: ${stats.br.stats.pc.solo.wins}`;
-          var winrate = document.getElementById('winrate-solo');
-          winrate.innerHTML = `Win Rate: ${stats.br.stats.pc.solo.winRate}%`;
+          self.stats.solo.kpd = stats.br.stats.pc.solo.kpd;
+          self.stats.solo.totalWins = stats.br.stats.pc.solo.wins;
+          self.stats.solo.winRate = stats.br.stats.pc.solo.winRate;
 
           // Duos
-          var killDeath = document.getElementById('kpd-duo');
-          killDeath.innerHTML = `K/D: ${stats.br.stats.pc.duo.kpd}`;
-          var totalwins = document.getElementById('totalwins-duo');
-          totalwins.innerHTML = `Wins: ${stats.br.stats.pc.duo.wins}`;
-          var winrate = document.getElementById('winrate-duo');
-          winrate.innerHTML = `Win Rate: ${stats.br.stats.pc.duo.winRate}%`;
+          self.stats.duo.kpd = stats.br.stats.pc.duo.kpd;
+          self.stats.duo.totalWins = stats.br.stats.pc.duo.wins;
+          self.stats.duo.winRate = stats.br.stats.pc.duo.winRate;
 
           // Squads
-          var killDeath = document.getElementById('kpd-squad');
-          killDeath.innerHTML = `K/D: ${stats.br.stats.pc.squad.kpd}`;
-          var totalwins = document.getElementById('totalwins-squad');
-          totalwins.innerHTML = `Wins: ${stats.br.stats.pc.squad.wins}`;
-          var winrate = document.getElementById('winrate-squad');
-          winrate.innerHTML = `Win Rate: ${stats.br.stats.pc.squad.winRate}%`;
+          self.stats.squad.kpd = stats.br.stats.pc.squad.kpd;
+          self.stats.squad.totalWins = stats.br.stats.pc.squad.wins;
+          self.stats.squad.winRate = stats.br.stats.pc.squad.winRate;
+
+        } else {
+          self.isObtained = false;
         }
       })
     },
-
     handleEnter: function(e) {
       var keycode = (e.keyCode ? e.keyCode : e.which);
       if (keycode == '13') {
         this.getStats();
       }
     },
-
     goHome() {
       this.$router.push('/')
     },
-
     goToStatus() {
       this.$router.push('/status')
     },
-
     goToProfile() {
       this.$router.push('/profile')
     }
