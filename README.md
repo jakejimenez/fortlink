@@ -26,7 +26,7 @@ npm run build
 - [ ] Profile Page for easy access to finding friends, your stats, etc. (Experimental, may be removed.)
 - [x] Fortnite Server Status scraped directly from http://status.epicgames.com
 - [ ] Complete List of all Back Bling, Skins, Items, Guns (Damage, etc.), etc.
-- [ ] Weekly Battle Pass Challenges (With checklist and any cheatsheets available)
+- [x] Weekly Battle Pass Challenges (With checklist and any cheatsheets available)
 - [ ] Featured Twitch Streamers Page with their respective configs
 
 ### Platforms
