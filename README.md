@@ -21,7 +21,7 @@ npm run build
 
 ### Features
 - [x] Latest Fortnite News via Epic Games Fortnite API
-- [x] User Stats via Epic Games Fortnite application
+- [x] User Stats via Epic Games Fortnite API
 - [ ] Fortnite Match/Friend Finder with Coach Finder
 - [ ] Profile Page for easy access to finding friends, your stats, etc.
 - [x] Fortnite Server Status scraped directly from http://status.epicgames.com
