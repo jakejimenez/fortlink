@@ -31,6 +31,11 @@ export default new Router({
       component: require('@/components/Status').default
     },
     {
+      path: '/battlepass',
+      name: 'battlepass',
+      component: require('@/components/BattlePass').default
+    },
+    {
       path: '*',
       redirect: '/'
     }

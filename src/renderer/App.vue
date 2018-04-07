@@ -25,4 +25,5 @@ var app = firebase.initializeApp({
   @import url("./assets/css/vendor/bootstrap/css/bootstrap.min.css");
   @import url("https://fonts.googleapis.com/css?family=Luckiest+Guy");
   @import url("./assets/css/main.css");
+  @import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 </style>

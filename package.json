@@ -1,7 +1,7 @@
 {
   "name": "fortlink",
   "productName": "fortlink",
-  "version": "0.1.0",
+  "version": "0.7.6",
   "author": "r00t1000 <jacob.jime@gmail.com>",
   "description": "An electron-vue project",
   "license": null,

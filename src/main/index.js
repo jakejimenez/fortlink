@@ -14,7 +14,8 @@ var mb = menubar({
   index: winURL,
   width: 400,
   height: 800,
-  preloadWindow: true
+  preloadWindow: true,
+  icon: '../../static/Favicon_small.png'
 })
 
 mb.on('ready', function ready () {

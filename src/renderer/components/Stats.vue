@@ -1,13 +1,14 @@
 <template>
 <div>
   <h2 style="text-align: center">{{ title }}</h2>
-  <div style="width: 60%; margin: 0 auto;" class="btn-toolbar">
+  <div style="width: 70%; margin: 0 auto;" class="btn-toolbar">
     <div class="btn-group">
       <a v-on:click="goHome" class="btn btn-primary" href="#fakelink"><span class="fui-home"></span></a>
-      <a class="btn btn-primary active" href="#fakelink"><span class="fui-list-columned"></span></a>
+      <a class="btn btn-primary active" href="#fakelink"><i class="fa fa-list-ol"></i></a>
       <a class="btn btn-primary" href="#fakelink"><span class="fui-search"></span></a>
-      <a v-on:click="goToProfile"  class="btn btn-primary" href="#fakelink"><span class="fui-user"></span></a>
-      <a v-on:click="goToStatus" class="btn btn-primary" href="#"><span class="fui-windows"></span></a>
+      <a v-on:click="goToProfile" class="btn btn-primary disabled" href="#fakelink"><span class="fui-user"></span></a>
+      <a v-on:click="goToStatus" class="btn btn-primary" href="#"><i class="fa fa-server"></i></a>
+      <a v-on:click="goToBP" class="btn btn-primary" href="#"><img width="18" src="../assets/images/bp_icon.png" /></a>
     </div>
   </div>
   <br />
@@ -142,6 +143,12 @@ export default {
     },
     goHome() {
       this.$router.push('/')
+    },
+    goToBP() {
+      this.$router.push('/battlepass')
+    },
+    goToStats() {
+      this.$router.push('/stats')
     },
     goToStatus() {
       this.$router.push('/status')

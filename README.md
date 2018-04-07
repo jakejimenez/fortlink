@@ -27,7 +27,7 @@ npm run build
 - [x] Fortnite Server Status scraped directly from http://status.epicgames.com
 - [ ] Complete List of all Back Bling, Skins, Items, Guns (Damage, etc.), etc.
 - [ ] Weekly Battle Pass Challenges (With checklist and any cheatsheets available)
-- [ ] Twitch Streamers Page with their respective configs
+- [ ] Featured Twitch Streamers Page with their respective configs
 
 ### Platforms
 - [ ] iOS
