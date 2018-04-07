@@ -1,8 +1,8 @@
 <template>
 <div>
-  <h2 style="text-align: center">{{ title }}</h2>
+  <h2 style="text-align: center; color: white;">{{ title.pt1 }}<span style="color: #EDC92D;">{{title.pt2}}</span></h2>
   <p class="ftfont" style="color:white; text-align: center;">{{ taskStatus }}</p>
-  <div style="width: 70%; margin: 0 auto;" class="btn-toolbar">
+  <div style="width: 80%; margin: 0 auto;" class="btn-toolbar">
     <div class="btn-group">
       <a v-on:click="goToHome" class="btn btn-primary" href="#"><span class="fui-home"></span></a>
       <a v-on:click="goToStats" class="btn btn-primary" href="#fakelink"><i class="fa fa-list-ol"></i></a>
@@ -10,6 +10,7 @@
       <a v-on:click="goToProfile" class="btn btn-primary disabled" href="#"><span class="fui-user"></span></a>
       <a class="btn btn-primary active" href="#"><i class="fa fa-server"></i></a>
       <a v-on:click="goToBP" class="btn btn-primary" href="#"><img width="18" src="../assets/images/bp_icon.png" /></a>
+      <a v-on:click="goToTwitch" class="btn btn-primary" href="#"><i class="fa fa-twitch"></i></a>
     </div>
   </div>
   <br/>
@@ -54,7 +55,7 @@ export default {
   name: 'status',
   data() {
     return {
-      title: "Fortlink",
+      title: {pt1: "Fort", pt2: "link"},
       taskStatus: "",
       statusList: [],
       parsedList: [{
@@ -89,6 +90,10 @@ export default {
 
     goToHome() {
       this.$router.push('/')
+    },
+
+    goToTwitch() {
+      this.$router.push('/twitch')
     },
 
     getStatus() {

@@ -36,6 +36,11 @@ export default new Router({
       component: require('@/components/BattlePass').default
     },
     {
+      path: '/twitch',
+      name: 'twitch',
+      component: require('@/components/Twitch').default
+    },
+    {
       path: '*',
       redirect: '/'
     }

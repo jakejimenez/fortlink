@@ -1,7 +1,7 @@
 <template>
 <div>
-  <h2 style="text-align: center">{{ title }}</h2>
-  <div style="width: 70%; margin: 0 auto;" class="btn-toolbar">
+  <h2 style="text-align: center; color: white;">{{ title.pt1 }}<span style="color: #EDC92D;">{{title.pt2}}</span></h2>
+  <div style="width: 80%; margin: 0 auto;" class="btn-toolbar">
     <div class="btn-group">
       <a v-on:click="goHome" class="btn btn-primary" href="#fakelink"><span class="fui-home"></span></a>
       <a class="btn btn-primary active" href="#fakelink"><i class="fa fa-list-ol"></i></a>
@@ -9,18 +9,19 @@
       <a v-on:click="goToProfile" class="btn btn-primary disabled" href="#fakelink"><span class="fui-user"></span></a>
       <a v-on:click="goToStatus" class="btn btn-primary" href="#"><i class="fa fa-server"></i></a>
       <a v-on:click="goToBP" class="btn btn-primary" href="#"><img width="18" src="../assets/images/bp_icon.png" /></a>
+      <a v-on:click="goToTwitch" class="btn btn-primary" href="#"><i class="fa fa-twitch"></i></a>
     </div>
   </div>
   <br />
   <div class="container">
     <div class="todo">
       <div class="todo-search">
-        <input id="inputfield" class="todo-search-field ftfont" v-on:keyup="handleEnter" type="search" value="" placeholder="skrypt-cs">
+        <input id="inputfield" class="todo-search-field ftfont" v-on:keyup="handleEnter" type="search" value="" placeholder="TSM_Myth">
       </div>
       <ul>
         <li>
           <div class="todo-icon"></div>
-          <div v-if="isObtained" class="todo-content">
+          <div v-if="isObtained" style="color: white;" class="todo-content">
             <hr />
             <h4>General</h4>
             <span id="kpd-general">K/D: {{stats.general.kpd}}</span>
@@ -57,6 +58,9 @@
         </li>
       </ul>
     </div>
+    <a v-on:click="getStats" class="btn btn-primary btn-lg btn-block ftfont" href="#">Search</a>
+    <br />
+    <br />
   </div>
 </div>
 </template>
@@ -64,10 +68,10 @@
 <script>
 var request = require('request')
 export default {
-  name: 'home',
+  name: 'stats',
   data () {
     return {
-      title: "Fortlink",
+      title: {pt1: "Fort", pt2: "link"},
       isObtained: false,
       stats: {
         general: {
@@ -95,6 +99,7 @@ export default {
   },
   methods: {
     getStats() {
+      console.log("Working...")
       var self = this;
       var playerName = document.getElementById('inputfield').value;
       var options = {
@@ -108,6 +113,7 @@ export default {
       request(options, (error, response, body) => {
         if (!error && response.statusCode == 200) {
           var stats = JSON.parse(body);
+          console.log(stats)
           self.isObtained = true;
 
           // General
@@ -146,6 +152,9 @@ export default {
     },
     goToBP() {
       this.$router.push('/battlepass')
+    },
+    goToTwitch() {
+      this.$router.push('/twitch')
     },
     goToStats() {
       this.$router.push('/stats')
