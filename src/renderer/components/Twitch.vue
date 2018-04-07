@@ -15,6 +15,9 @@
   </div>
   <br/>
   <div class="container">
+    <a class="embedly-card" data-card-theme="dark" data-card-controls="0" href="https://www.twitch.tv/tsm_myth">TSM_Myth - Twitch</a>
+    <br />
+    <a class="btn btn-block btn-success ftfont" href="#">Open in Browser</a>
   </div>
 </div>
 </template>
@@ -28,7 +31,10 @@ export default {
   name: 'twitch',
   data() {
     return {
-      title: {pt1: "Fort", pt2: "link"},
+      title: {
+        pt1: "Fort",
+        pt2: "link"
+      },
       taskStatus: "",
       featuredTwitch: [{
           name: "tsm_myth",
