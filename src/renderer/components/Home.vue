@@ -59,6 +59,7 @@ export default {
   methods: {
     closeWindow() {
       this.w.close();
+      window.close()
     },
 
     goToBP() {
