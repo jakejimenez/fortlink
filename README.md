@@ -23,7 +23,7 @@ npm run build
 - [x] Latest Fortnite News via Epic Games Fortnite API
 - [x] User Stats via Epic Games Fortnite API
 - [ ] Fortnite Match/Friend Finder with Coach Finder
-- [ ] Profile Page for easy access to finding friends, your stats, etc.
+- [ ] Profile Page for easy access to finding friends, your stats, etc. (Experimental, may be removed.)
 - [x] Fortnite Server Status scraped directly from http://status.epicgames.com
 - [ ] Complete List of all Back Bling, Skins, Items, Guns (Damage, etc.), etc.
 - [ ] Weekly Battle Pass Challenges (With checklist and any cheatsheets available)
