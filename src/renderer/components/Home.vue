@@ -4,7 +4,7 @@
   <p class="ftfont" style="color:white; text-align: center;">{{ taskStatus }}</p>
   <div style="width: 60%; margin: 0 auto;" class="btn-toolbar">
     <div class="btn-group">
-      <a class="btn btn-primary" href="#"><span class="fui-home"></span></a>
+      <a class="btn btn-primary active" href="#"><span class="fui-home"></span></a>
       <a v-on:click="goToStats" class="btn btn-primary" href="#"><span class="fui-list-columned"></span></a>
       <a class="btn btn-primary" href="#"><span class="fui-search"></span></a>
       <a v-on:click="goToProfile" class="btn btn-primary" href="#"><span class="fui-user"></span></a>

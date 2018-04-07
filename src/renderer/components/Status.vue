@@ -8,7 +8,7 @@
       <a v-on:click="goToStats" class="btn btn-primary" href="#"><span class="fui-list-columned"></span></a>
       <a class="btn btn-primary" href="#"><span class="fui-search"></span></a>
       <a v-on:click="goToProfile" class="btn btn-primary" href="#"><span class="fui-user"></span></a>
-      <a class="btn btn-primary" href="#"><span class="fui-windows"></span></a>
+      <a class="btn btn-primary active" href="#"><span class="fui-windows"></span></a>
     </div>
   </div>
   <br/>

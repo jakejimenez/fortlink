@@ -8,7 +8,7 @@
       <a v-on:click="goToHome" class="btn btn-primary" href="#"><span class="fui-home"></span></a>
       <a v-on:click="goToStats" class="btn btn-primary" href="#"><span class="fui-list-columned"></span></a>
       <a class="btn btn-primary" href="#"><span class="fui-search"></span></a>
-      <a class="btn btn-primary" href="#"><span class="fui-user"></span></a>
+      <a class="btn btn-primary active" href="#"><span class="fui-user"></span></a>
       <a v-on:click="goToStatus" class="btn btn-primary" href="#"><span class="fui-windows"></span></a>
     </div>
   </div>
@@ -25,8 +25,10 @@
         <label class="login-field-icon fui-lock" for="login-pass"></label>
       </div>
 
-      <a v-on:click="loginUser" class="btn btn-primary btn-lg btn-block ftfont" href="#">Log in</a>
-      <a v-on:click="signup" class="btn btn-success btn-lg btn-block ftfont" href="#">Signup</a>
+      <!--v-on:click="loginUser"-->
+      <!--v-on:click="signup"-->
+      <a class="btn btn-primary btn-lg btn-block ftfont" href="#">Log in</a>
+      <a class="btn btn-success btn-lg btn-block ftfont" href="#">Signup</a>
       <a class="login-link ftfont" href="#">Lost your password?</a>
     </div>
   </div>
@@ -148,6 +150,8 @@ export default {
           self.userAuth.uid = localDb.get('user.uid')
           self.userAuth.refreshToken = localDb.get('user.refreshToken');
           self.userAuth.imageURL = localDb.get('user.imageURL');
+
+          self.taskStatus = "";
         }
       });
     },
@@ -159,9 +163,9 @@ export default {
         if (error) {
           console.log(error)
           self.taskStatus = "An error occured."
+        } else {
+          self.taskStatus = "User created..."
         }
-
-        self.taskStatus = "User created..."
       })
     },
 

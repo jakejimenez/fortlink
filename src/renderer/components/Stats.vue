@@ -4,7 +4,7 @@
   <div style="width: 60%; margin: 0 auto;" class="btn-toolbar">
     <div class="btn-group">
       <a v-on:click="goHome" class="btn btn-primary" href="#fakelink"><span class="fui-home"></span></a>
-      <a class="btn btn-primary" href="#fakelink"><span class="fui-list-columned"></span></a>
+      <a class="btn btn-primary active" href="#fakelink"><span class="fui-list-columned"></span></a>
       <a class="btn btn-primary" href="#fakelink"><span class="fui-search"></span></a>
       <a v-on:click="goToProfile"  class="btn btn-primary" href="#fakelink"><span class="fui-user"></span></a>
       <a v-on:click="goToStatus" class="btn btn-primary" href="#"><span class="fui-windows"></span></a>

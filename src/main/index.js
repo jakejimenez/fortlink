@@ -18,5 +18,5 @@ var mb = menubar({
 })
 
 mb.on('ready', function ready () {
-  console.log('Fortlink running v0.4.4')
+  console.log('Fortlink running v0.7.6')
 })

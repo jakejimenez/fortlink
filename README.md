@@ -1,25 +1,44 @@
-# fortlink
+# Fortlink
 
-> An electron-vue project
+> Useful tools for PC Fortnite players
 
 #### Build Setup
 
 ``` bash
-# install dependencies
+# Install Dependencies
 npm install
 
-# serve with hot reload at localhost:9080
+# Serve application to taskbar
 npm run dev
 
-# build electron application for production
+# Build Electron-Vue application in respective platform executable
 npm run build
 
-
-# lint all JS/Vue component files in `src/`
-npm run lint
 
 ```
 
 ---
 
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[7c4e3e9](https://github.com/SimulatedGREG/electron-vue/tree/7c4e3e90a772bd4c27d2dd4790f61f09bae0fcef) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
+### Features
+- [x] Latest Fortnite News via Epic Games Fortnite API
+- [x] User Stats via Epic Games Fortnite application
+- [ ] Fortnite Match/Friend Finder with Coach Finder
+- [ ] Profile Page for easy access to finding friends, your stats, etc.
+- [x] Fortnite Server Status scraped directly from http://status.epicgames.com
+- [ ] Complete List of all Back Bling, Skins, Items, Guns (Damage, etc.), etc.
+
+### Platforms
+- [ ] iOS
+- [ ] Android
+- [x] Mac OS X
+- [x] Windows
+- [x] Linux
+
+### Screenshots
+![Home Page](https://i.imgur.com/TaRjpw6.png)
+![Stats Page](https://i.imgur.com/Tdpdqz6.png)
+![Profile Page](https://i.imgur.com/7NMbIYb.png)
+![Status Page](https://i.imgur.com/GYxnUsd.png)
+
+
+###### Submit a pull request to request more features or platforms.
